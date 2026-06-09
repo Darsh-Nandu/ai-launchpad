@@ -5,9 +5,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
   return {
-    // Set VITE_BASE_PATH to your repo name for GitHub Pages, e.g. "/ai-launchpad/"
-    // Defaults to "/" for local dev or custom domain deployments
-    base: process.env.VITE_BASE_PATH || '/',
+    base: '/ai-launchpad/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
@@ -15,8 +13,8 @@ export default defineConfig(() => {
       },
     },
     server: {
-      hmr: process.env.DISABLE_HMR !== 'true',
-      watch: process.env.DISABLE_HMR === 'true' ? null : {},
+      hmr: true,
+      watch: {},
     },
   };
 });
