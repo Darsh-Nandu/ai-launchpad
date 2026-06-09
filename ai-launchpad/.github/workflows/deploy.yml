@@ -1,0 +1,88 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch: # allow manual trigger from the Actions tab
+
+# Grant GITHUB_TOKEN permission to deploy to Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one deployment runs at a time; skip queued runs but keep any in-progress
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  # ── 1. Build ────────────────────────────────────────────────
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+        env:
+          NODE_ENV: production
+          # Set this to /YOUR-REPO-NAME/ so asset paths work on GitHub Pages.
+          # Example: if your repo is github.com/yourname/ai-launchpad
+          #          set VITE_BASE_PATH = /ai-launchpad/
+          # Add this in: Settings → Secrets → Actions → New repository variable
+          VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH || '/' }}
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/
+
+  # ── 2. Deploy ───────────────────────────────────────────────
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+# ─────────────────────────────────────────────────────────────
+# SETUP CHECKLIST
+#
+# 1. Go to your repo → Settings → Pages
+#    → Source: "GitHub Actions"
+#
+# 2. Go to Settings → Secrets and variables → Actions → Variables tab
+#    → Add a NEW VARIABLE (not secret):
+#       Name:  VITE_BASE_PATH
+#       Value: /your-repo-name/   ← must start AND end with /
+#    Skip this step only if you're using a custom domain.
+#
+# 3. Push to main — the workflow fires automatically.
+#    Your site will be live at:
+#    https://<your-username>.github.io/<your-repo-name>/
+# ─────────────────────────────────────────────────────────────

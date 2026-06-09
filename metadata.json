@@ -1,0 +1,6 @@
+{
+  "name": "AI Launchpad",
+  "description": "A comprehensive learning portal for AI/ML students featuring structured roadmaps, curated resources, recommended media, programming projects, and an interactive Gemini-powered doubt solver.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
