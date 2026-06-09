@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { HubType } from "../types";
-import { Menu, X, Sparkles, BookOpen, Layers, Monitor, ChevronRight, Brain, Rocket } from "lucide-react";
+import { Menu, X, Cpu, BookOpen, Layers, Monitor, ChevronRight, Brain, Rocket } from "lucide-react";
 
 interface NavbarProps {
   currentHub: HubType;
@@ -72,7 +72,7 @@ export default function Navbar({ currentHub, onChangeHub }: NavbarProps) {
               currentHub === HubType.PLAYGROUND ? navStyles.btnActive : navStyles.btnInactive
             }`}
           >
-            <Sparkles className="w-3.5 h-3.5" />
+            <Cpu className="w-3.5 h-3.5" />
             <span>Playground</span>
           </button>
 
@@ -160,7 +160,7 @@ export default function Navbar({ currentHub, onChangeHub }: NavbarProps) {
                 className={`py-2 text-[10px] uppercase tracking-wider font-extrabold text-center rounded-lg border ${
                   currentHub === HubType.PLAYGROUND
                     ? "bg-[#ffe599] text-black border-black border-2"
-                    : "bg-white/5 text-gray-400 border-gray-300/30"
+                    : "bg-black/5 text-slate-700 border-black/10"
                 }`}
               >
                 Playground
@@ -170,7 +170,7 @@ export default function Navbar({ currentHub, onChangeHub }: NavbarProps) {
                 className={`py-2 text-[10px] uppercase tracking-wider font-extrabold text-center rounded-lg border ${
                   currentHub === HubType.STUDIO
                     ? "bg-[#1a56db] text-white border-[#1a56db]"
-                    : "bg-white/5 text-gray-400 border-gray-300/30"
+                    : "bg-black/5 text-slate-700 border-black/10"
                 }`}
               >
                 Studio
@@ -180,7 +180,7 @@ export default function Navbar({ currentHub, onChangeHub }: NavbarProps) {
                 className={`py-2 text-[10px] uppercase tracking-wider font-extrabold text-center rounded-lg border ${
                   currentHub === HubType.LIBRARY
                     ? "bg-[#e56845] text-white border-[#e56845]"
-                    : "bg-white/5 text-gray-400 border-gray-300/30"
+                    : "bg-black/5 text-slate-700 border-black/10"
                 }`}
               >
                 Library

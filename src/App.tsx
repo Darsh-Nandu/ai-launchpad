@@ -85,18 +85,18 @@ export default function App() {
             <a
               href="https://github.com"
               target="_blank"
-              rel="referrer"
+              rel="noopener noreferrer"
               className="p-2 ml-1 rounded-full bg-black/5 hover:bg-black/15 hover:scale-105 active:scale-95 transition-all text-current shadow-sm"
               title="GitHub Repository Placeholder"
             >
               <Github className="w-5 h-5" />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/darsh-nandu-072a39373"
               target="_blank"
-              rel="referrer"
+              rel="noopener noreferrer"
               className="p-2 rounded-full bg-black/5 hover:bg-black/15 hover:scale-105 active:scale-95 transition-all text-current shadow-sm"
-              title="LinkedIn Profile Placeholder"
+              title="Darsh Nandu's LinkedIn Profile"
             >
               <Linkedin className="w-5 h-5" />
             </a>
@@ -107,7 +107,15 @@ export default function App() {
             <p className="text-xs font-bold uppercase tracking-wider flex items-center justify-center md:justify-end gap-1">
               <span>Built with</span>
               <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500 animate-pulse inline-block" />
-              <span>by Darsh Nandu</span>
+              <span>by</span>
+              <a
+                href="https://www.linkedin.com/in/darsh-nandu-072a39373"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-[#3d85c6] transition-colors cursor-pointer"
+              >
+                Darsh Nandu
+              </a>
             </p>
             <p className="text-[10px] font-mono tracking-widest uppercase opacity-60">
               © Copyright 2025. All Rights Reserved.

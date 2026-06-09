@@ -116,15 +116,15 @@ export default function LibraryHub() {
               The Scholar's Desk
             </h3>
 
-            <div className="flex gap-1.5 p-1 bg-[#eae3d9]/40 border border-[#d6cbbe] rounded-xl">
+            <div className="flex overflow-x-auto max-w-full gap-1 p-0.5 sm:p-1 bg-[#eae3d9]/40 border border-[#d6cbbe] rounded-xl scrollbar-none">
               {(["Courses", "Books", "Papers", "Tools"] as TabOption[]).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`px-4 py-2 rounded-lg text-sm font-bold transition-all uppercase tracking-wide cursor-pointer ${
+                  className={`px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-md sm:rounded-lg text-xs sm:text-sm font-bold transition-all uppercase tracking-wide cursor-pointer whitespace-nowrap ${
                     activeTab === tab
                       ? "bg-[#e56845] text-white shadow"
-                      : "text-gray-600 hover:bg-[#eae3d9]/70 hover:text-black"
+                      : "text-gray-650 text-gray-600 hover:bg-[#eae3d9]/70 hover:text-black"
                   }`}
                 >
                   {tab}
@@ -133,6 +133,47 @@ export default function LibraryHub() {
             </div>
 
           </div>
+
+          {/* FEATURED: Research Paper Finder — shown only on Papers tab */}
+          {activeTab === "Papers" && (
+            <a
+              href="https://darsh-nandu.github.io/scientific-ledger/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block w-full mb-8 rounded-2xl border-2 border-[#2c2b30] overflow-hidden shadow-[4px_4px_0px_0px_rgba(44,43,48,1)] hover:shadow-[6px_6px_0px_0px_rgba(229,104,69,1)] transition-all duration-300 hover:-translate-y-0.5"
+            >
+              <div className="bg-[#2c2b30] px-6 py-4 flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="bg-[#e56845] w-9 h-9 rounded-xl border-2 border-[#e56845]/40 flex items-center justify-center shrink-0">
+                    <Newspaper className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#e56845] mb-0.5">
+                      ✦ Featured Tool
+                    </p>
+                    <h3 className="font-serif font-bold text-white text-lg leading-tight">
+                      Scientific Ledger — Research Paper Finder
+                    </h3>
+                  </div>
+                </div>
+                <span className="shrink-0 text-[11px] font-mono font-bold uppercase tracking-wider text-[#e56845] flex items-center gap-1 group-hover:translate-x-1 transition-transform duration-150">
+                  Open <ExternalLink className="w-3 h-3" />
+                </span>
+              </div>
+              <div className="bg-[#f7f3ee] px-6 py-3 flex items-center justify-between gap-4">
+                <p className="text-sm text-gray-600 font-medium leading-relaxed">
+                  My personal research discovery tool — search, filter, and explore academic papers across AI, ML, and Computer Science. Built for students who are tired of drowning in Google Scholar noise.
+                </p>
+                <div className="hidden sm:flex gap-2 shrink-0">
+                  {["Search", "Filter", "Discover"].map((tag) => (
+                    <span key={tag} className="text-[10px] font-mono bg-[#e56845]/10 text-[#e56845] border border-[#e56845]/20 px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </a>
+          )}
 
           {/* DYNAMIC CARD RENDERS */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -227,12 +268,12 @@ export default function LibraryHub() {
               <a
                 key={video.id}
                 href={
-                  video.badge === "Playlist"
-                    ? `https://www.youtube.com/playlist?list=${video.youtubeId}`
+                  video.playlistId
+                    ? `https://www.youtube.com/playlist?list=${video.playlistId}`
                     : `https://www.youtube.com/watch?v=${video.youtubeId}`
                 }
                 target="_blank"
-                rel="referrer"
+                rel="noopener noreferrer"
                 className="group bg-white border border-[#eae3d9] rounded-2xl overflow-hidden hover:shadow-2xl transition-all flex flex-col justify-between"
               >
                 <div>

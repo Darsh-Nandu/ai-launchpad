@@ -34,6 +34,7 @@ export interface VideoItem {
   title: string;
   channel: string;
   badge: string; // "Playlist" or duration e.g. "45 min"
+  playlistId?: string;
 }
 
 export interface ProjectItem {
@@ -47,7 +48,7 @@ export interface ProjectItem {
 
 export interface ChatMessage {
   id: string;
-  sender: "user" | "gemini" | "system";
+  sender: "user" | "claude" | "system";
   text: string;
   timestamp: Date;
 }

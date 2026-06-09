@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
-  Brain, Cpu, MessageSquare, Eye, Sparkles, Clock, Compass, ArrowRight,
+  Brain, Cpu, MessageSquare, Eye, Clock, Compass, ArrowRight,
   BookOpen, Code, Shield, Layers, ChevronRight, ChevronLeft, RotateCcw, 
-  Check, Play, Sliders, Activity, Sparkle, Target, CheckCircle2
+  Check, Play, Sliders, Activity, Target, CheckCircle2
 } from "lucide-react";
 import { ROADMAP_TRACKS, PROJECTS } from "../data";
 import { RoadmapTrack, ProjectItem, Difficulty } from "../types";
@@ -319,9 +319,6 @@ export default function StudioHub() {
         {/* ─── Apple Header: Interactive Showcase line-up ─── */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 mt-6">
           <div>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-slate-200 rounded-full text-[10px] font-mono font-bold text-slate-600 mb-3 uppercase tracking-wide shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-sky-500" /> Liquid Glass Experience
-            </span>
             <h1 className="text-4xl md:text-5.5xl font-black text-slate-900 tracking-tight leading-none">
               Explore the line-up.
             </h1>
@@ -345,13 +342,13 @@ export default function StudioHub() {
         <div className="relative group/carousel">
           <button
             onClick={() => scrollTracks("left")}
-            className="absolute -left-4 top-[40%] -translate-y-1/2 z-20 w-11 h-11 rounded-full backdrop-blur-xl bg-white/90 border border-slate-200 shadow-md hover:bg-slate-50 flex items-center justify-center text-slate-600 hover:text-slate-900 transition-all cursor-pointer"
+            className="hidden md:flex absolute -left-4 top-[40%] -translate-y-1/2 z-20 w-11 h-11 rounded-full backdrop-blur-xl bg-white/90 border border-slate-200 shadow-md hover:bg-slate-50 items-center justify-center text-slate-600 hover:text-slate-900 transition-all cursor-pointer"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={() => scrollTracks("right")}
-            className="absolute -right-4 top-[40%] -translate-y-1/2 z-20 w-11 h-11 rounded-full backdrop-blur-xl bg-white/90 border border-slate-200 shadow-md hover:bg-slate-50 flex items-center justify-center text-slate-600 hover:text-slate-900 transition-all cursor-pointer"
+            className="hidden md:flex absolute -right-4 top-[40%] -translate-y-1/2 z-20 w-11 h-11 rounded-full backdrop-blur-xl bg-white/90 border border-slate-200 shadow-md hover:bg-slate-50 items-center justify-center text-slate-600 hover:text-slate-900 transition-all cursor-pointer"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
@@ -433,7 +430,6 @@ export default function StudioHub() {
                       {track.id === "generative-ai" && (
                         <div className="relative">
                           <Brain className="w-12 h-12 opacity-80" style={{ color: preset.themeColor }} />
-                          <Sparkle className="w-5 h-5 absolute -right-2 -top-2 text-amber-500 animate-none" />
                         </div>
                       )}
                     </div>
@@ -617,7 +613,7 @@ export default function StudioHub() {
         </div>
 
         {/* ─── 🧪 Simplified Projects Arena: Liquid Glass Bento Playground ─── */}
-        <div id="projects-section" className="border-t border-slate-200/80 pt-16">
+        <div id="projects-section" className="border-t border-slate-200/80 pt-16 font-mono">
           <div className="mb-14 text-center max-w-2xl mx-auto">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 border border-emerald-200 rounded-full text-[10px] font-mono font-bold text-emerald-700 mb-3.5 uppercase tracking-wide">
               🤖 Practical Sandboxing Hub
@@ -631,7 +627,7 @@ export default function StudioHub() {
           </div>
 
           {/* Difficulty tier tabs buttons */}
-          <div className="flex items-center justify-center gap-2 mb-10 select-none">
+          <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-3 mb-8 sm:mb-10 select-none px-2">
             {(["Beginner", "Intermediate", "Advanced"] as Difficulty[]).map((dif) => {
               const isActive = activeDifficulty === dif;
               const count = PROJECTS.filter((p) => p.difficulty === dif).length;
@@ -639,7 +635,7 @@ export default function StudioHub() {
                 <button
                   key={dif}
                   onClick={() => setActiveDifficulty(dif)}
-                  className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono font-extrabold border transition-all cursor-pointer ${
+                  className={`flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-mono font-extrabold border transition-all cursor-pointer whitespace-nowrap ${
                     isActive
                       ? dif === "Beginner"
                         ? "bg-emerald-500/10 border-emerald-300 text-emerald-700 shadow-sm"
@@ -649,11 +645,11 @@ export default function StudioHub() {
                       : "bg-white/80 border-slate-200 text-slate-500 hover:bg-white hover:border-slate-300"
                   }`}
                 >
-                  <span className={`w-2 h-2 rounded-full ${
+                  <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${
                     dif === "Beginner" ? "bg-emerald-500" : dif === "Intermediate" ? "bg-sky-500" : "bg-amber-500"
                   }`} />
                   {dif} Track
-                  <span className="px-1.5 py-0.5 bg-slate-100 text-slate-500 text-[9.5px] font-bold rounded-md ml-0.5">
+                  <span className="px-1.5 py-0.5 bg-slate-100 text-slate-500 text-[9px] sm:text-[9.5px] font-bold rounded-md ml-0.5">
                     {count}
                   </span>
                 </button>

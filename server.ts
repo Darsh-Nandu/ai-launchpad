@@ -12,37 +12,30 @@ async function startServer() {
 
   // Lazy-loaded Gemini SDK client
   let ai: GoogleGenAI | null = null;
-  function getGemini(): GoogleGenAI {
+  function getAI(): GoogleGenAI {
     if (!ai) {
       const apiKey = process.env.GEMINI_API_KEY;
       if (!apiKey || apiKey === "MY_GEMINI_API_KEY") {
         throw new Error(
-          "GEMINI_API_KEY is not configured. Please set your Gemini API Key in the Settings > Secrets panel of your AI Studio workspace."
+          "GEMINI_API_KEY is not configured. Please set your Gemini API Key in the Secrets panel."
         );
       }
-      ai = new GoogleGenAI({
-        apiKey: apiKey,
-        httpOptions: {
-          headers: {
-            "User-Agent": "aistudio-build",
-          },
-        },
-      });
+      ai = new GoogleGenAI({ apiKey });
     }
     return ai;
   }
 
   // API route for doubt solving
-  app.post("/api/gemini/generate", async (req, res) => {
+  app.post("/api/claude/generate", async (req, res) => {
     try {
       const { prompt } = req.body;
       if (!prompt) {
         return res.status(400).json({ error: "The prompt query cannot be empty." });
       }
 
-      const client = getGemini();
+      const client = getAI();
       const response = await client.models.generateContent({
-        model: "gemini-3.5-flash",
+        model: "gemini-2.0-flash",
         contents: prompt,
         config: {
           systemInstruction:
@@ -55,7 +48,7 @@ async function startServer() {
 
       res.json({ text: response.text });
     } catch (error: any) {
-      console.error("Gemini API server route error:", error);
+      console.error("AI server route error:", error);
       res.status(500).json({
         error: error.message || "An unexpected error occurred inside the AI server.",
       });

@@ -348,7 +348,8 @@ export const VIDEOS: VideoItem[] = [
   },
   {
     id: "vid-2",
-    youtubeId: "qbigFwMapgU",
+    youtubeId: "PaFPbb6Z_fM",
+    playlistId: "PLtBw6nj87gUY5bU_jG0F_NUpzZHe_S-81",
     title: "Machine Learning Playlist: Visualizing Core Statistical Foundations",
     channel: "StatQuest with Josh Starmer",
     badge: "Playlist",
@@ -365,12 +366,12 @@ export const VIDEOS: VideoItem[] = [
     youtubeId: "VqpS0kO7SCo",
     title: "Complete Python Machine Learning Roadmap & Concepts Tutorial",
     channel: "CampusX (Hindi)",
-    badge: "Playlist",
+    badge: "2h 40m",
   },
   {
     id: "vid-5",
     youtubeId: "mEsleV16qdo",
-    title: "Generative AI Full Course: Gemini API, LangChain, & Vector Databases for Developers",
+    title: "Generative AI Full Course: LangChain, & Vector Databases for Developers",
     channel: "freeCodeCamp.org",
     badge: "4h 50m",
   },
@@ -380,6 +381,14 @@ export const VIDEOS: VideoItem[] = [
     title: "LangChain Crash Course for Beginners with Python Solutions",
     channel: "Patrick Loeber",
     badge: "45m",
+  },
+  {
+    id: "vid-7",
+    youtubeId: "ZftI2fEz0Fw",
+    playlistId: "PLKnIAq7c0vKE-ZfMEb-TAn38VGrfXg_r6",
+    title: "100 Days of Deep Learning: Complete Course & Neural Architectures",
+    channel: "CampusX (Hindi)",
+    badge: "Playlist",
   },
 ];
 
