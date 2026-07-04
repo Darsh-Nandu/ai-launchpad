@@ -1,77 +1,49 @@
 # AI Launchpad
 
-A comprehensive learning portal for AI/ML students — structured roadmaps, curated resources, recommended videos, programming projects, and an interactive Gemini-powered doubt solver.
+A free, structured, textbook-style website for learning **Machine Learning and Deep Learning from scratch** - in the spirit of W3Schools / GeeksforGeeks reference sites, not a landing page.
 
-🌐 **Live:** `https://<your-username>.github.io/<your-repo-name>/`
+## Features
 
----
+- 13-module curriculum: math foundations → Python → EDA → classical ML → deep learning → CNNs → sequence models → Transformers
+- Every topic page follows the same 8-step template: Intuition → Theory → Math → Diagram → Code → Pros/Cons → Interview Q&A → Quiz
+- Left sidebar navigation with search, collapsible modules, and per-module progress counters
+- Read-tracking, module progress bars, and a "Continue where you left off" button (localStorage, no account)
+- KaTeX for math, Prism for syntax-highlighted Python with copy buttons, inline SVG diagrams
+- Light/dark mode, fully responsive, on-page table of contents
 
-## Tech Stack
+## Tech
 
-- **Frontend** — React 19, TypeScript, Tailwind CSS v4, Vite
-- **AI** — Gemini API (`gemini-2.0-flash`) called directly from the browser
-- **Hosting** — GitHub Pages (fully static, no server needed)
+Pure static HTML/CSS/JS - no build step, no dependencies to install. KaTeX and Prism are loaded from CDNs. Routing is hash-based (`#/module/topic`), so it works on GitHub Pages without any 404 tricks.
 
----
-
-## Local Development
-
-**Prerequisites:** Node.js 20+
-
-```bash
-npm install
-npm run dev
+```
+index.html          app shell
+css/style.css       all styling (CSS variables for theming)
+js/curriculum.js    the full module/topic tree (single source of truth)
+js/app.js           router, sidebar, search, progress, quizzes
+js/content/*.js     one file per module; registers pages into CONTENT["module/topic"]
 ```
 
-App runs at `http://localhost:3000`. You'll be prompted to enter your Gemini API key inside the chat UI — it's saved to `localStorage` so you only need to enter it once.
+### Adding a new topic page
 
----
+1. Make sure the topic exists in `js/curriculum.js` (all planned topics are already listed).
+2. In the matching `js/content/<module>.js` file, add:
+   ```js
+   CONTENT["module-id/topic-slug"] = { html: String.raw`...page HTML...` };
+   ```
+3. Follow the 8-step template used by the existing pages (see `js/content/ml.js`).
+
+Topics without registered content automatically render as "coming soon" stubs.
+
+## Run locally
+
+Just open `index.html` in a browser, or serve the folder:
+
+```
+python -m http.server 8000
+```
 
 ## Deploy to GitHub Pages
 
-### 1. Enable GitHub Pages
+Already wired up: `.github/workflows/deploy.yml` deploys on every push to `main`.
 
-Go to your repo → **Settings → Pages → Source → GitHub Actions**
-
-### 2. Set the base path variable
-
-Go to **Settings → Secrets and variables → Actions → Variables tab** and add:
-
-| Name | Value |
-|---|---|
-| `VITE_BASE_PATH` | `/your-repo-name/` ← must start and end with `/` |
-
-Skip this if you're using a custom domain (leave it as `/`).
-
-### 3. Push to `main`
-
-The workflow fires automatically and your site goes live at:
-```
-https://<your-username>.github.io/<your-repo-name>/
-```
-
----
-
-## GitHub Actions Workflows
-
-| File | Triggers | What it does |
-|---|---|---|
-| `deploy.yml` | Push to `main`, manual | Typechecks → builds → deploys to Pages |
-| `ci.yml` | Pull requests | Typechecks → builds (no deploy) |
-
----
-
-## Gemini API Key
-
-Since this is a static site, the Gemini API key is entered by the user in the chat UI and stored in their browser's `localStorage`. No key is ever hardcoded or committed to the repo.
-
----
-
-## Available Scripts
-
-| Command | Description |
-|---|---|
-| `npm run dev` | Start development server |
-| `npm run build` | Typecheck + build for production |
-| `npm run lint` | TypeScript typecheck only |
-| `npm run clean` | Remove `dist/` folder |
+One-time setup in the GitHub repo: **Settings → Pages → Source → GitHub Actions**.
